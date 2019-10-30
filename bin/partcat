@@ -1,0 +1,77 @@
+#!/usr/bin/perl
+
+package main;
+
+use strict;
+use warnings;
+
+use Tkx;
+use Getopt::Long;
+use Pod::Usage qw(pod2usage);
+
+#use UI::MainWindow;
+
+sub main {
+	my $help;
+	my $usage;
+
+	# Get command-line options.
+	GetOptions(
+		"usage|?" => \$usage,
+		"help|h" => \$help
+	) or pod2usage(2);
+
+	# Show usage/manual.
+	if ($usage) {
+		pod2usage(-verbose => 1, -exitval => 0);
+	} elsif ($help) {
+		pod2usage(-verbose => 2, -exitval => 0);
+	}
+
+	return 1;
+}
+
+main;
+
+__END__
+
+=head1 NAME
+
+PartCat - Electronic Components Cataloger and Organizer
+
+=head1 SYNOPSIS
+
+B<partcat> [options]
+
+  Options:
+     --usage           This message.
+     --help            Full documentation.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<--usage>
+
+Prints a simple usage message.
+
+=item B<--help>
+
+Prints the full manual on how to use this application.
+
+=back
+
+=head1 DESCRIPTION
+
+A client for the PartCat server. This will enable you to manage your entire
+library of electronic components.
+
+=head1 AUTHOR
+
+Nathan Campos <nathan@innoveworkshop.com>
+
+=head1 COPYRIGHT
+
+Copyright (c) 2019- Innove Workshop Company.
+
+=cut
