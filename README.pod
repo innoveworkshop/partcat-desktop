@@ -1,0 +1,29 @@
+=pod
+
+=head1 NAME
+
+PartCat - Electronic Components Cataloger and Organizer
+
+=head1 SUMMARY
+
+A client for the PartCat server. This will enable you to manage your entire
+library of electronic components.
+
+=head1 SETUP
+
+Just run C<make>.
+
+=head1 TESTING
+
+To make sure everything is perfect for deployment you can run C<make test>,
+which will run all the unit tests to make sure that you have a working system.
+
+=head1 AUTHOR
+
+Nathan Campos <nathan@innoveworkhsop.com>
+
+=head1 COPYRIGHT
+
+Copyright (c) 2019- Innove Workshop Company.
+
+=cut
