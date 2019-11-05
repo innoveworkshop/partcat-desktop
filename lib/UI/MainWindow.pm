@@ -96,20 +96,53 @@ sub _setup_layout {
 	$n_main->add($f_img, -text => "Images");
 
 	# Setup components tab.
-	$self->_setup_component_search($f_comp);
+	$self->_setup_component_tab($f_comp);
 }
 
 # Sets up the component search tab layout.
-sub _setup_component_search {
+sub _setup_component_tab {
 	my ($self, $frm) = @_;
 
-	# Search panel.
-	my $f_search = $frm->new_ttk__labelframe(-text => "Search");
-	my $c_cat = $f_search->new_ttk__combobox(-values => "All Transistors Interesting Something");
-	my $e_mpn = $f_search->new_ttk__entry;
+	# Setup grid weights.
+	$frm->g_grid_columnconfigure(0, -weight => 1);
+	$frm->g_grid_rowconfigure(1, -weight => 1);
+
+	# Search Frame.
+	my $f_search = $frm->new_ttk__labelframe(-text => "Search", -padding => 5);
+	$f_search->g_grid_columnconfigure(1, -weight => 1);
 	$f_search->g_grid(-column => 0, -row => 0, -sticky => "nwe");
-	$c_cat->g_grid(-column => 0, -row => 0, -sticky => "nw");
-	$e_mpn->g_grid(-column => 1, -row => 0);
+
+	# Categories ComboBox.
+	my $l_cat = $f_search->new_ttk__label(-text => "Category");
+	my $c_cat = $f_search->new_ttk__combobox(-values => "All Transistors Interesting Something");
+	$l_cat->g_grid(-column => 0, -row => 0, -sticky => "nw");
+	$c_cat->g_grid(-column => 0, -row => 1, -sticky => "nws");
+
+	# Search Entry.
+	my $l_mpn = $f_search->new_ttk__label(-text => "Part Number");
+	my $e_mpn = $f_search->new_ttk__entry;
+	$l_mpn->g_grid(-column => 1, -row => 0, -padx => "5 0", -sticky => "nw");
+	$e_mpn->g_grid(-column => 1, -row => 1, -padx => "5 0", -sticky => "nwes");
+
+	# Search Button.
+	my $b_search = $f_search->new_ttk__button(-text => "Search");
+	$b_search->g_grid(-column => 0, -row => 2, -columnspan => 2, -pady => "5 0", -sticky => "wes");
+
+	# Results Frame.
+	my $f_results = $frm->new_ttk__labelframe(-text => "Results", -padding => 5);
+	$f_results->g_grid_columnconfigure(0, -weight => 1);
+	$f_results->g_grid(-column => 0, -row => 1, -pady => "5 0", -sticky => "nwes");
+
+	# Operations Frame.
+	my $f_oper = $f_results->new_ttk__frame;
+	$f_oper->g_grid_columnconfigure(0, -weight => 1);
+	$f_oper->g_grid(-column => 0, -row => 0, -sticky => "nwe");
+
+	# Operation Buttons.
+	my $b_remove = $f_oper->new_ttk__button(-text => "Remove");
+	$b_remove->g_grid(-column => 1, -row => 0, -padx => 5, -sticky => "ne");
+	my $b_add = $f_oper->new_ttk__button(-text => "Add");
+	$b_add->g_grid(-column => 2, -row => 0, -sticky => "ne");
 }
 
 1;
@@ -135,6 +168,24 @@ Initializes the main window object with a I<$title>.
 =item I<$mw>->C<show>
 
 Starts the Tk main loop.
+
+=back
+
+=head1 PRIVATE METHODS
+
+=over 4
+
+=item I<$self>->C<_setup_menus>()
+
+Places all the menu items in the menubar of the window.
+
+=item I<$self>->C<_setup_layout>()
+
+Places all the "main" layout pieces into the window.
+
+=item I<$self>->C<_setup_component_tab>(I<$frm>)
+
+Places all the component tab widgets inside the designated frame in I<$frame>.
 
 =back
 
