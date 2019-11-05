@@ -5,11 +5,15 @@ package main;
 use strict;
 use warnings;
 
-use Tkx;
 use Getopt::Long;
 use Pod::Usage qw(pod2usage);
 
-#use UI::MainWindow;
+# Include the project module directory.
+use FindBin;
+use File::Spec;
+use lib File::Spec->catdir($FindBin::Bin, '..', 'lib');
+
+use UI::MainWindow;
 
 sub main {
 	my $help;
@@ -28,6 +32,10 @@ sub main {
 		pod2usage(-verbose => 2, -exitval => 0);
 	}
 
+	# Setup the main window and show it.
+	my $mw = UI::MainWindow->new("PartCat");
+	$mw->show;
+
 	return 1;
 }
 
@@ -37,7 +45,7 @@ __END__
 
 =head1 NAME
 
-PartCat - Electronic Components Cataloger and Organizer
+PartCat - Electronic components cataloger and organizer.
 
 =head1 SYNOPSIS
 
