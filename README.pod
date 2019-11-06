@@ -6,8 +6,8 @@ PartCat - Electronic Components Cataloger and Organizer
 
 =head1 SUMMARY
 
-A client for the PartCat server. This will enable you to manage your entire
-library of electronic components.
+A client for the L<PartCat server|https://github.com/innoveworkshop/partcat-server>.
+This will enable you to manage your entire library of electronic components.
 
 =head1 SETUP
 
