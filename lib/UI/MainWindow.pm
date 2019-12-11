@@ -112,49 +112,65 @@ sub _setup_component_tab {
 	$f_search->g_grid_columnconfigure(1, -weight => 1);
 	$f_search->g_grid(-column => 0, -row => 0, -sticky => "nwe");
 
-	# Categories ComboBox.
-	my $l_cat = $f_search->new_ttk__label(-text => "Category");
-	my $c_cat = $f_search->new_ttk__combobox(-values => "All Transistors Interesting Something");
-	$l_cat->g_grid(-column => 0, -row => 0, -sticky => "nw");
-	$c_cat->g_grid(-column => 0, -row => 1, -sticky => "nws");
-
 	# Search Entry.
-	my $l_mpn = $f_search->new_ttk__label(-text => "Part Number");
-	my $e_mpn = $f_search->new_ttk__entry;
-	$l_mpn->g_grid(-column => 1, -row => 0, -padx => "5 0", -sticky => "nw");
-	$e_mpn->g_grid(-column => 1, -row => 1, -padx => "5 0", -sticky => "nwes");
-
-	# Search Button.
+	my $l_smpn = $f_search->new_ttk__label(-text => "Part Number");
+	my $e_smpn = $f_search->new_ttk__entry;
+	$l_smpn->g_grid(-column => 1, -row => 0, -sticky => "nw");
+	$e_smpn->g_grid(-column => 1, -row => 1, -sticky => "nwes");
 	my $b_search = $f_search->new_ttk__button(-text => "Search");
-	$b_search->g_grid(-column => 0, -row => 2, -columnspan => 2, -pady => "5 0", -sticky => "wes");
+	$b_search->g_grid(-column => 2, -row => 0, -rowspan => 2, -padx => "5 0", -sticky => "nwes");
 
 	# Results Frame.
 	my $f_results = $frm->new_ttk__labelframe(-text => "Results", -padding => 5);
 	$f_results->g_grid_columnconfigure(0, -weight => 1);
-	$f_results->g_grid_rowconfigure(1, -weight => 1);
+	$f_results->g_grid_rowconfigure(0, -weight => 1);
 	$f_results->g_grid(-column => 0, -row => 1, -pady => "5 0", -sticky => "nwes");
-
-	# Operations Frame.
-	my $f_oper = $f_results->new_ttk__frame;
-	$f_oper->g_grid_columnconfigure(0, -weight => 1);
-	$f_oper->g_grid(-column => 0, -row => 0, -sticky => "nwe");
-
-	# Operation Buttons.
-	my $b_remove = $f_oper->new_ttk__button(-text => "Remove");
-	$b_remove->g_grid(-column => 1, -row => 0, -padx => 5, -sticky => "ne");
-	my $b_add = $f_oper->new_ttk__button(-text => "Add");
-	$b_add->g_grid(-column => 2, -row => 0, -sticky => "ne");
 
 	# Component TreeView.
 	my $t_comp = $f_results->new_ttk__treeview(-columns => "qnt desc");
 	$t_comp->configure(-selectmode => "browse");
-	$t_comp->g_grid(-column => 0, -row => 1, -sticky => "nwes");
-	$t_comp->column("#0", -width => 80);
+	$t_comp->g_grid(-column => 0, -row => 0, -sticky => "nwes");
+	$t_comp->column("#0", -width => 100);
 	$t_comp->heading("#0", -text => "Part Number");
-	$t_comp->column("qnt", -anchor => "center", -width => 10);
+	$t_comp->column("qnt", -anchor => "center", -width => 20);
 	$t_comp->heading("qnt", -text => "Qty");
-	$t_comp->column("desc", -anchor => "w", -width => 600);
+	$t_comp->column("desc", -anchor => "w", -width => 300);
 	$t_comp->heading("desc", -text => "Description");
+
+	# Component View Frame.
+	my $f_comp = $frm->new_ttk__labelframe(-text => "Component", -padding => 5, -width => 400);
+	$f_comp->g_grid_rowconfigure(9, -weight => 1);
+	$f_comp->g_grid(-column => 1, -row => 0, -rowspan => 2, -padx => "10 0", -sticky => "nwes");
+
+	# Main component data.
+	#my $l_img = $f_comp->new_ttk__label();
+	my $l_id = $f_comp->new_ttk__label(-text => "ID");
+	my $e_id = $f_comp->new_ttk__entry(-state => "disabled");
+	$l_id->g_grid(-column => 1, -row => 0, -sticky => "nwe");
+	$e_id->g_grid(-column => 1, -row => 1, -sticky => "nwe");
+	my $l_qnt = $f_comp->new_ttk__label(-text => "Quantity");
+	my $s_qnt = $f_comp->new_ttk__spinbox(-from => 0.0, -increment => 1.0);
+	$l_qnt->g_grid(-column => 2, -row => 0, -padx => "5 0", -sticky => "nwe");
+	$s_qnt->g_grid(-column => 2, -row => 1, -padx => "5 0", -sticky => "nwe");
+	my $l_cat = $f_comp->new_ttk__label(-text => "Category");
+	my $c_cat = $f_comp->new_ttk__combobox(-values => "Op-Amp Transistor Test");
+	$l_cat->g_grid(-column => 1, -row => 2, -columnspan => 2, -sticky => "nwe");
+	$c_cat->g_grid(-column => 1, -row => 3, -columnspan => 2, -sticky => "nwe");
+	my $l_mpn = $f_comp->new_ttk__label(-text => "Part Number");
+	my $e_mpn = $f_comp->new_ttk__entry;
+	$l_mpn->g_grid(-column => 1, -row => 4, -columnspan => 2, -sticky => "nwe");
+	$e_mpn->g_grid(-column => 1, -row => 5, -columnspan => 2, -sticky => "nwe");
+	my $l_desc = $f_comp->new_ttk__label(-text => "Description");
+	my $e_desc = $f_comp->new_ttk__entry;
+	$l_desc->g_grid(-column => 0, -row => 6, -columnspan => 3, -sticky => "nwe");
+	$e_desc->g_grid(-column => 0, -row => 7, -columnspan => 3, -sticky => "nwe");
+	my $l_param = $f_comp->new_ttk__label(-text => "Component Parameters");
+	my $t_param = $f_comp->new_ttk__treeview(-columns => "key value");
+	$l_param->g_grid(-column => 0, -row => 8, -columnspan => 3, -sticky => "nwe");
+	$t_param->configure(-show => "headings", -selectmode => "browse");
+	$t_param->g_grid(-column => 0, -row => 9, -columnspan => 3, -sticky => "nwes");
+	$t_param->heading("key", -text => "Parameter");
+	$t_param->heading("value", -text => "Value");
 
 	# Test populate the treeview.
 	$t_comp->insert("", "end", -id => "1", -text =>  "Voltage Regulators", -open => 1);
@@ -217,3 +233,4 @@ Nathan Campos <nathan@innoveworkshop.com>
 Copyright (c) 2019- Innove Workshop Company.
 
 =cut
+
