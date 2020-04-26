@@ -9,6 +9,11 @@ PartCat - Electronic Components Cataloger and Organizer
 A client for the L<PartCat server|https://github.com/innoveworkshop/partcat-server>.
 This will enable you to manage your entire library of electronic components.
 
+=head1 REQUIREMENTS
+
+To run this software you'll require all the libraries that are listed in the
+C<cpanfile> and also L<Tklib|https://www.tcl.tk/software/tklib/>.
+
 =head1 SETUP
 
 Just run C<make>.
